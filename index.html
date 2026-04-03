@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cash-Wise - Money Split App</title>
+    <title>SplitWise - Money Split App</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
@@ -12,7 +12,7 @@
         <header>
             <div class="logo">
                 <i class="fas fa-coins"></i>
-                <h1>Cash-Wise</h1>
+                <h1>SplitWise</h1>
             </div>
             <p class="tagline">Split expenses. Share fairly. Pay instantly.</p>
         </header>
@@ -76,27 +76,6 @@
                 </div>
             </div>
 
-            <div class="qr-upload-card">
-                <div class="qr-upload-header">
-                    <i class="fas fa-qrcode"></i>
-                    <h3>Payment QR Code</h3>
-                </div>
-                <div class="qr-upload-content">
-                    <input type="file" id="qrUpload" accept="image/*" style="display: none;">
-                    <button type="button" id="uploadQrBtn" class="upload-btn">
-                        <i class="fas fa-upload"></i>
-                        Upload Your QR Code
-                    </button>
-                    <div id="qrPreview" class="qr-preview" style="display: none;">
-                        <img id="previewImage" src="" alt="Custom QR Code">
-                        <button type="button" id="removeQrBtn" class="remove-btn">
-                            <i class="fas fa-trash"></i>
-                        </button>
-                    </div>
-                    <p class="qr-hint">Upload your UPI QR code to receive payments directly</p>
-                </div>
-            </div>
-
             <div class="summary-cards">
                 <div class="summary-card total-card">
                     <div class="card-icon">
@@ -117,7 +96,7 @@
                         <h2 id="perPersonAmount">₹0.00</h2>
                         <p class="click-hint">
                             <i class="fas fa-qrcode"></i>
-                            Tap to show payment QR
+                            Tap to generate payment QR
                         </p>
                     </div>
                 </div>
