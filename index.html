@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SplitWise - Money Split App</title>
+    <title>SR-Pay - Smart Money Splitting</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
 </head>
@@ -11,123 +11,150 @@
     <div class="app-container">
         <header>
             <div class="logo">
-                <i class="fas fa-coins"></i>
-                <h1>SplitWise</h1>
+                <div class="logo-icon">
+                    <i class="fas fa-credit-card"></i>
+                    <span class="logo-accent">₹</span>
+                </div>
+                <div class="logo-text">
+                    <h1>SR-Pay</h1>
+                    <span class="logo-subtitle">Smart Split</span>
+                </div>
             </div>
-            <p class="tagline">Split expenses. Share fairly. Pay instantly.</p>
+            <p class="tagline">Split bills instantly • Pay seamlessly • Track expenses</p>
         </header>
+
+        <section class="balance-overview">
+            <div class="balance-card">
+                <div class="balance-header">
+                    <i class="fas fa-wallet"></i>
+                    <span>Total Expenses</span>
+                </div>
+                <h2 id="totalAmount">₹0.00</h2>
+            </div>
+            <div class="balance-card highlight">
+                <div class="balance-header">
+                    <i class="fas fa-users"></i>
+                    <span>Per Person</span>
+                </div>
+                <h2 id="perPersonAmount">₹0.00</h2>
+            </div>
+        </section>
+
+        <section class="split-section">
+            <div class="split-card">
+                <div class="split-header">
+                    <i class="fas fa-user-friends"></i>
+                    <h3>Split Between</h3>
+                </div>
+                <div class="people-counter">
+                    <button type="button" class="counter-btn" id="decreaseBtn">
+                        <i class="fas fa-minus"></i>
+                    </button>
+                    <div class="counter-display">
+                        <input type="number" id="friendCount" value="2" min="1" readonly>
+                        <span>people</span>
+                    </div>
+                    <button type="button" class="counter-btn" id="increaseBtn">
+                        <i class="fas fa-plus"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
 
         <section class="input-section">
             <div class="section-header">
                 <i class="fas fa-plus-circle"></i>
                 <h2>Add New Expense</h2>
             </div>
-            <div class="input-card">
-                <div class="input-group">
+            <div class="expense-form">
+                <div class="form-row">
                     <div class="input-field">
                         <i class="fas fa-tag"></i>
-                        <input type="text" id="expenseName" placeholder="What's this expense for?">
+                        <input type="text" id="expenseName" placeholder="Expense description">
                     </div>
-                    <div class="input-field">
-                        <i class="fas fa-rupee-sign"></i>
+                </div>
+                <div class="form-row">
+                    <div class="input-field amount-field">
+                        <span class="currency">₹</span>
                         <input type="number" id="expenseAmount" placeholder="0.00" min="0" step="0.01">
                     </div>
                     <button id="addBtn" class="add-btn">
                         <i class="fas fa-plus"></i>
-                        Add Expense
+                        Add
                     </button>
                 </div>
             </div>
         </section>
 
-        <section class="list-section">
+        <section class="expenses-section">
             <div class="section-header">
-                <i class="fas fa-list-ul"></i>
-                <h2>Expense Breakdown</h2>
+                <i class="fas fa-receipt"></i>
+                <h2>Recent Expenses</h2>
             </div>
-            <div class="expense-card">
+            <div class="expenses-container">
                 <ul id="expenseList" class="expense-list">
                     <li class="empty-state">
-                        <i class="fas fa-receipt"></i>
-                        <p>No expenses added yet</p>
-                        <span>Start by adding your first expense above</span>
+                        <div class="empty-icon">
+                            <i class="fas fa-receipt"></i>
+                        </div>
+                        <p>No expenses yet</p>
+                        <span>Add your first expense to get started</span>
                     </li>
                 </ul>
             </div>
         </section>
 
-        <section class="summary-section">
-            <div class="split-controls-card">
-                <div class="split-header">
-                    <i class="fas fa-users"></i>
-                    <h3>Split Between</h3>
-                </div>
-                <div class="split-input">
-                    <label for="friendCount">Number of people:</label>
-                    <div class="counter-controls">
-                        <button type="button" class="counter-btn" id="decreaseBtn">
-                            <i class="fas fa-minus"></i>
-                        </button>
-                        <input type="number" id="friendCount" value="2" min="1" readonly>
-                        <button type="button" class="counter-btn" id="increaseBtn">
-                            <i class="fas fa-plus"></i>
-                        </button>
+        <section class="payment-section">
+            <button class="payment-btn" id="payBox">
+                <div class="payment-content">
+                    <div class="payment-icon">
+                        <i class="fas fa-qrcode"></i>
+                    </div>
+                    <div class="payment-text">
+                        <h3>Generate Payment QR</h3>
+                        <p>Tap to create UPI payment link</p>
+                    </div>
+                    <div class="payment-arrow">
+                        <i class="fas fa-chevron-right"></i>
                     </div>
                 </div>
-            </div>
-
-            <div class="summary-cards">
-                <div class="summary-card total-card">
-                    <div class="card-icon">
-                        <i class="fas fa-calculator"></i>
-                    </div>
-                    <div class="card-content">
-                        <h3>Total Amount</h3>
-                        <h2 id="totalAmount">₹0.00</h2>
-                    </div>
-                </div>
-                
-                <div class="summary-card per-person-card" id="payBox">
-                    <div class="card-icon">
-                        <i class="fas fa-user-friends"></i>
-                    </div>
-                    <div class="card-content">
-                        <h3>Per Person</h3>
-                        <h2 id="perPersonAmount">₹0.00</h2>
-                        <p class="click-hint">
-                            <i class="fas fa-qrcode"></i>
-                            Tap to generate payment QR
-                        </p>
-                    </div>
-                </div>
-            </div>
+            </button>
         </section>
     </div>
 
     <div id="qrModal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>
+                <div class="modal-title">
                     <i class="fas fa-qrcode"></i>
-                    Payment QR Code
-                </h2>
-                <span class="close-btn">&times;</span>
+                    <h2>Payment QR Code</h2>
+                </div>
+                <button class="close-btn">&times;</button>
             </div>
             <div class="modal-body">
-                <div class="amount-display">
-                    <p>Amount to pay:</p>
-                    <h3 id="modalAmountDisplay">₹0.00</h3>
+                <div class="payment-details">
+                    <div class="amount-display">
+                        <span class="amount-label">Amount to Pay</span>
+                        <h3 id="modalAmountDisplay">₹0.00</h3>
+                    </div>
+                    <div class="payee-info">
+                        <i class="fas fa-user-circle"></i>
+                        <span>Sumit Rathod</span>
+                    </div>
                 </div>
                 <div class="qr-container">
                     <img id="qrImage" src="" alt="UPI Payment QR Code">
                 </div>
-                <div class="payment-info">
-                    <p class="scan-hint">
+                <div class="payment-apps">
+                    <p class="scan-instruction">
                         <i class="fas fa-mobile-alt"></i>
                         Scan with any UPI app
                     </p>
-                    <div class="upi-apps">
-                        <span>GPay</span> • <span>PhonePe</span> • <span>Paytm</span> • <span>BHIM</span>
+                    <div class="app-logos">
+                        <span class="app-name">GPay</span>
+                        <span class="app-name">PhonePe</span>
+                        <span class="app-name">Paytm</span>
+                        <span class="app-name">BHIM</span>
                     </div>
                 </div>
             </div>
