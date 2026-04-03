@@ -234,7 +234,7 @@ header {
 }
 
 /* Split Controls */
-.split-controls-card, .qr-upload-card {
+.split-controls-card {
     margin: 1.5rem;
     background: #f8fafc;
     border-radius: 16px;
@@ -242,18 +242,18 @@ header {
     border: 1px solid #e2e8f0;
 }
 
-.split-header, .qr-upload-header {
+.split-header {
     display: flex;
     align-items: center;
     gap: 0.5rem;
     margin-bottom: 1rem;
 }
 
-.split-header i, .qr-upload-header i {
+.split-header i {
     color: #4f46e5;
 }
 
-.split-header h3, .qr-upload-header h3 {
+.split-header h3 {
     font-weight: 600;
     color: #1f2937;
 }
@@ -302,76 +302,6 @@ header {
     border-radius: 8px;
     font-weight: 600;
     background: white;
-}
-
-/* QR Upload Section */
-.qr-upload-content {
-    text-align: center;
-}
-
-.upload-btn {
-    background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
-    color: white;
-    border: none;
-    padding: 0.75rem 1.5rem;
-    border-radius: 10px;
-    font-size: 0.9rem;
-    font-weight: 600;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: all 0.2s ease;
-    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
-}
-
-.upload-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
-}
-
-.qr-preview {
-    margin-top: 1rem;
-    position: relative;
-    display: inline-block;
-}
-
-.qr-preview img {
-    width: 120px;
-    height: 120px;
-    border-radius: 12px;
-    border: 2px solid #e5e7eb;
-    object-fit: cover;
-}
-
-.remove-btn {
-    position: absolute;
-    top: -8px;
-    right: -8px;
-    background: #ef4444;
-    color: white;
-    border: none;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.75rem;
-    transition: all 0.2s ease;
-}
-
-.remove-btn:hover {
-    background: #dc2626;
-    transform: scale(1.1);
-}
-
-.qr-hint {
-    font-size: 0.8rem;
-    color: #6b7280;
-    margin-top: 0.75rem;
-    font-style: italic;
 }
 
 /* Summary Cards */
