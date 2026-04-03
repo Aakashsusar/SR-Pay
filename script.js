@@ -11,13 +11,6 @@ const perPersonAmountDisplay = document.getElementById('perPersonAmount');
 const decreaseBtn = document.getElementById('decreaseBtn');
 const increaseBtn = document.getElementById('increaseBtn');
 
-// QR Upload elements
-const qrUpload = document.getElementById('qrUpload');
-const uploadQrBtn = document.getElementById('uploadQrBtn');
-const qrPreview = document.getElementById('qrPreview');
-const previewImage = document.getElementById('previewImage');
-const removeQrBtn = document.getElementById('removeQrBtn');
-
 // Modal Elements
 const payBox = document.getElementById('payBox');
 const qrModal = document.getElementById('qrModal');
@@ -29,7 +22,6 @@ const modalAmountDisplay = document.getElementById('modalAmountDisplay');
 let expenses = [];
 let defaultNameCounter = 1;
 let currentPerPerson = 0;
-let customQrImage = null; // Store uploaded QR image
 
 // *** Your Updated UPI Information ***
 const MY_UPI_ID = "9421864709@upi"; 
@@ -42,11 +34,6 @@ decreaseBtn.addEventListener('click', decreaseFriendCount);
 increaseBtn.addEventListener('click', increaseFriendCount);
 payBox.addEventListener('click', openQRModal);
 closeBtn.addEventListener('click', closeQRModal);
-
-// QR Upload event listeners
-uploadQrBtn.addEventListener('click', () => qrUpload.click());
-qrUpload.addEventListener('change', handleQrUpload);
-removeQrBtn.addEventListener('click', removeCustomQr);
 
 // Allow Enter key to add expense
 expenseAmountInput.addEventListener('keypress', (e) => {
@@ -80,32 +67,6 @@ function increaseFriendCount() {
     let current = parseInt(friendCountInput.value);
     friendCountInput.value = current + 1;
     updateCalculations();
-}
-
-// QR Upload Functions
-function handleQrUpload(event) {
-    const file = event.target.files[0];
-    if (file && file.type.startsWith('image/')) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            customQrImage = e.target.result;
-            previewImage.src = customQrImage;
-            qrPreview.style.display = 'block';
-            uploadQrBtn.innerHTML = '<i class="fas fa-check"></i> QR Code Uploaded';
-            uploadQrBtn.style.background = 'linear-gradient(135deg, #10b981 0%, #059669 100%)';
-        };
-        reader.readAsDataURL(file);
-    } else {
-        alert('Please select a valid image file.');
-    }
-}
-
-function removeCustomQr() {
-    customQrImage = null;
-    qrPreview.style.display = 'none';
-    qrUpload.value = '';
-    uploadQrBtn.innerHTML = '<i class="fas fa-upload"></i> Upload Your QR Code';
-    uploadQrBtn.style.background = 'linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%)';
 }
 
 function addExpense() {
@@ -185,20 +146,18 @@ function openQRModal() {
         return;
     }
 
-    // Format the amount to 2 decimal places
+    // Format the amount to 2 decimal places as required by UPI
     const finalAmount = currentPerPerson.toFixed(2);
     
-    // Use custom QR if uploaded, otherwise generate dynamic UPI QR
-    if (customQrImage) {
-        qrImage.src = customQrImage;
-    } else {
-        // Create the UPI Deep Link and generate QR
-        const upiString = `upi://pay?pa=${MY_UPI_ID}&pn=${MY_NAME}&am=${finalAmount}&cu=INR`;
-        const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(upiString)}`;
-        qrImage.src = qrApiUrl;
-    }
+    // Create the UPI Deep Link
+    // Format: upi://pay?pa=UPI_ID&pn=NAME&am=AMOUNT&cu=INR
+    const upiString = `upi://pay?pa=${MY_UPI_ID}&pn=${MY_NAME}&am=${finalAmount}&cu=INR`;
+    
+    // Use a free API to convert the UPI string into a QR code image
+    const qrApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=${encodeURIComponent(upiString)}`;
     
     // Update the modal content
+    qrImage.src = qrApiUrl;
     modalAmountDisplay.textContent = `₹${finalAmount}`;
     
     // Show the modal
